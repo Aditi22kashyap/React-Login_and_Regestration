@@ -1,7 +1,10 @@
 import React ,{ useState }from 'react';
+import { useAuth } from '../context/AuthContext';
+
 
 const Registration = () => {
-  // Your registration page JSX goes here
+  //  registration page JSX goes here
+  const auth = useAuth();
 
   //user's 1.name, 2.email, 3.password, 4.Mobile Number 5.Age 6.Address 7.Gender 8.Occupation.
 
@@ -15,7 +18,7 @@ const Registration = () => {
     gender:'',
     occupation:''
   });
-
+  
   //State to store form validation
 
   const[errors,setErrors]= useState({});
@@ -58,11 +61,23 @@ const Registration = () => {
       newErrors.occupation ='Occupation is required';
     }
 
+    
     if (Object.keys(newErrors).length === 0) {
       // Form is valid, you can proceed with submission or other actions
       console.log('Form data:', formData);
+      auth.registerUser(formData); // Store user data in localStorage
+      setFormData({
+        name: '',
+        email: '',
+        password: '',
+        mobilenumer: '',
+        age: '',
+        Address: '',
+        gender: '',
+        occupation: '',
+      }); // Reset the form data after registration
+      alert('Registration successful!');
     } else {
-      // There are errors, update the state with error messages
       setErrors(newErrors);
     }
   }
@@ -108,16 +123,16 @@ const Registration = () => {
         </div>
         {/* Mobile Number */}
         <div>
-          <label>Mobile Number:</label>
-          <input
-            type="number"
-            name="number"
-            value={formData.mobilenumer}
-            onChange={handleChange}
-            required
-          />
-          {errors.mobilenumer && <div className="error">{errors.mobilenumer}</div>}
-        </div>
+  <label>Mobile Number:</label>
+  <input
+    type="number"
+    name="mobilenumer" // Corrected to "mobilenumer"
+    value={formData.mobilenumer}
+    onChange={handleChange}
+    required
+  />
+  {errors.mobilenumer && <div className="error">{errors.mobilenumer}</div>}
+</div>
         {/* Age */}
         <div>
           <label>Age:</label>
