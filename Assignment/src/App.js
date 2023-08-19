@@ -1,12 +1,14 @@
 import React from 'react';
+import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './Login/Login';
 import Registration from './Registration/Registration';
 import { AuthProvider } from './context/AuthContext';
 import UserDetails from './User/UserDetails';
+
 const App = () => {
   return (
-    <AuthProvider> {/* Wrap the entire application with AuthProvider */}
+    <AuthProvider>
       <Router>
         <Routes>
           <Route path="/" element={<Login />} />
@@ -19,5 +21,3 @@ const App = () => {
 };
 
 export default App;
-
-

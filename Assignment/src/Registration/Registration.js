@@ -1,11 +1,11 @@
 import React ,{ useState }from 'react';
 import { useAuth } from '../context/AuthContext';
-
+import { createBrowserHistory } from 'history';
 
 const Registration = () => {
   //  registration page JSX goes here
   const auth = useAuth();
-
+  const history = createBrowserHistory(); 
   //user's 1.name, 2.email, 3.password, 4.Mobile Number 5.Age 6.Address 7.Gender 8.Occupation.
 
   const[formData,setFormData]=useState({
@@ -77,17 +77,18 @@ const Registration = () => {
         occupation: '',
       }); // Reset the form data after registration
       alert('Registration successful!');
+      history.push('/user-details');
     } else {
       setErrors(newErrors);
     }
   }
 
   return (
-    <div>
+    <div className='outer-box '>
       <h2>Registration Page</h2>
       <form onSubmit={handleSubmit}>
         {/* Input fields for name, email, password, and other fields */}
-        <div>
+        <div className='inner-box'>
           <label>Name:</label>
           <input
             type="text"
@@ -98,7 +99,7 @@ const Registration = () => {
           />
           {errors.name && <div className="error">{errors.name}</div>}
         </div>
-        <div>
+        <div className='inner-box'>
           <label>Email:</label>
           <input
             type="email"
@@ -110,7 +111,7 @@ const Registration = () => {
           {errors.email && <div className="error">{errors.email}</div>}
         </div>
         {/* password */}
-        <div>
+        <div className='inner-box'>
           <label>Password:</label>
           <input
             type="password"
@@ -122,7 +123,7 @@ const Registration = () => {
           {errors.password && <div className="error">{errors.password}</div>}
         </div>
         {/* Mobile Number */}
-        <div>
+        <div className='inner-box'>
   <label>Mobile Number:</label>
   <input
     type="number"
@@ -134,7 +135,7 @@ const Registration = () => {
   {errors.mobilenumer && <div className="error">{errors.mobilenumer}</div>}
 </div>
         {/* Age */}
-        <div>
+        <div className='inner-box'>
           <label>Age:</label>
           <input
             type="number"
@@ -146,7 +147,7 @@ const Registration = () => {
           {errors.age && <div className="error">{errors.age}</div>}
         </div>
         {/* Address */}
-        <div>
+        <div className='inner-box'>
           <label>Address:</label>
           <input
             type="text"
@@ -158,7 +159,7 @@ const Registration = () => {
           {errors.Address && <div className="error">{errors.Address}</div>}
         </div>
         {/* Gender */}
-        <div>
+        <div className='inner-box'>
   <label>Gender:</label>
   <input
     type="radio"
@@ -182,7 +183,7 @@ const Registration = () => {
   {errors.gender && <div className="error">{errors.gender}</div>}
 </div>
         {/* Occupation */}
-        <div>
+        <div className='inner-box'>
   <label>Occupation:</label>
   <input
     type="text"

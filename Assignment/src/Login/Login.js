@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { createBrowserHistory } from 'history';
-
+// import { useHistory } from 'react-router-dom'; 
 const Login = () => {
 
   const auth = useAuth();
   const history = createBrowserHistory(); 
+  // const history = useHistory(); 
   const [formData, setFormData] = useState({
     emailOrMobile: '',
     password: '',
@@ -50,10 +51,10 @@ if (loginSuccessful) {
   
 
   return (
-    <div>
+    <div className='outer-box'>
       <h2>Login Page</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className='inner-box'>
           <label>Email/Mobile:</label>
           <input
             type="text"
@@ -64,7 +65,7 @@ if (loginSuccessful) {
           />
           {errors.emailOrMobile && <div className="error">{errors.emailOrMobile}</div>}
         </div>
-        <div>
+        <div className='inner-box'>
           <label>Password:</label>
           <input
             type="password"
