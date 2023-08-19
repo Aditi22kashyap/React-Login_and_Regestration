@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { createBrowserHistory } from 'history';
 
 const Login = () => {
 
   const auth = useAuth();
-
+  const history = createBrowserHistory(); 
   const [formData, setFormData] = useState({
     emailOrMobile: '',
     password: '',
@@ -35,6 +36,7 @@ const Login = () => {
 if (loginSuccessful) {
   console.log('Login successful!');
   alert('Login successful!');
+  history.push('/user-details');
   // Perform actions after successful login
 } else {
   setLoginError('Invalid email or password'); // Set the error message
