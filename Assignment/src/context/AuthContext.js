@@ -34,16 +34,10 @@ export const AuthProvider = ({ children }) => {
       return false; // Return false for failed login
     }
   };
-
-  const logoutUser = () => {
-    setUserCredentials([]);
-  };
-
   const value = {
     userCredentials,
     registerUser,
     loginUser,
-    logoutUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

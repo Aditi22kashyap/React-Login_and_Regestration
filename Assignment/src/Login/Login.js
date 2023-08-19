@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { createBrowserHistory } from 'history';
+// import { createBrowserHistory } from 'history';
+import { useNavigate } from 'react-router-dom';
 // import { useHistory } from 'react-router-dom'; 
 const Login = () => {
 
   const auth = useAuth();
-  const history = createBrowserHistory(); 
+  const history = useNavigate(); 
   // const history = useHistory(); 
   const [formData, setFormData] = useState({
     emailOrMobile: '',
@@ -37,7 +38,7 @@ const Login = () => {
 if (loginSuccessful) {
   console.log('Login successful!');
   alert('Login successful!');
-  history.push('/user-details');
+  history('/user-details');
   // Perform actions after successful login
 } else {
   setLoginError('Invalid email or password'); // Set the error message
@@ -52,8 +53,9 @@ if (loginSuccessful) {
 
   return (
     <div className='outer-box'>
+    
+      <form id='registrationform' onSubmit={handleSubmit}>
       <h2>Login Page</h2>
-      <form onSubmit={handleSubmit}>
         <div className='inner-box'>
           <label>Email/Mobile:</label>
           <input
@@ -77,9 +79,10 @@ if (loginSuccessful) {
           {errors.password && <div className="error">{errors.password}</div>}
         </div>
         <button type="submit">Login</button>
+        <p>Not a user? <Link to="/register">Register</Link></p>
       </form>
       {loginError && <div className="error">{loginError}</div>} 
-      <p>Not a user? <Link to="/register">Register</Link></p>
+      
     </div>
   );
 };

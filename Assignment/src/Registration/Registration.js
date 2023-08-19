@@ -1,11 +1,13 @@
 import React ,{ useState }from 'react';
 import { useAuth } from '../context/AuthContext';
-import { createBrowserHistory } from 'history';
+// import { createBrowserHistory } from 'history';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Registration = () => {
   //  registration page JSX goes here
   const auth = useAuth();
-  const history = createBrowserHistory(); 
+  const history = useNavigate();
+
   //user's 1.name, 2.email, 3.password, 4.Mobile Number 5.Age 6.Address 7.Gender 8.Occupation.
 
   const[formData,setFormData]=useState({
@@ -77,7 +79,7 @@ const Registration = () => {
         occupation: '',
       }); // Reset the form data after registration
       alert('Registration successful!');
-      history.push('/user-details');
+      history('/user-details');
     } else {
       setErrors(newErrors);
     }
@@ -85,9 +87,10 @@ const Registration = () => {
 
   return (
     <div className='outer-box '>
-      <h2>Registration Page</h2>
-      <form onSubmit={handleSubmit}>
+      
+      <form id='registrationform' onSubmit={handleSubmit}>
         {/* Input fields for name, email, password, and other fields */}
+        <h2>Registration Page</h2>
         <div className='inner-box'>
           <label>Name:</label>
           <input
@@ -196,6 +199,7 @@ const Registration = () => {
 </div>
 
         <button type="submit">Register</button>
+        <p>Already a user? <Link to="/">Login</Link></p>
       </form>
     </div>
   );

@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { createBrowserHistory } from 'history';
+import { useNavigate } from 'react-router-dom';
 
 const UserDetails = () => {
   const auth = useAuth();
-  const history = createBrowserHistory(); 
+  const history = useNavigate(); 
 
   useEffect(() => {
     if (!auth.userCredentials.length) {
       // Redirect to login page if userCredentials is empty
-      history.push('/');
+      history('/');
     }
-  }, [auth.userCredentials, history]);
-
+  }, [auth.userCredentials,history]);
+  console.log("user details page")
   const currentUser = auth.userCredentials[0]; // Assuming there's only one authenticated user
 
   const [showPassword, setShowPassword] = React.useState(false); // Use React.useState
@@ -22,13 +22,12 @@ const UserDetails = () => {
   };
 
   const handleLogout = () => {
-    auth.logoutUser();
-    history.push('/'); // Navigate to the login page after logout
+    history('/'); // Navigate to the login page after logout
   };
 
   if (!currentUser) {
     // Handle case when currentUser is undefined (e.g., not logged in)
-    history.push('/'); // Navigate to the login page if not logged in
+    history('/'); // Navigate to the login page if not logged in
     return null; // Return null or another component while waiting for redirection
   }
 
